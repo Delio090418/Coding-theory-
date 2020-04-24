@@ -1,0 +1,33 @@
+--this compute the v-number (see https://www.sciencedirect.com/science/article/pii/S0196885819301241?via%3Dihub, proposition 4.2)
+
+
+L=ass I
+f=(n)->flatten flatten  degrees mingens(quotient(I,L#n)/I)
+p=(n)->gens gb ideal(flatten mingens(quotient(I,L#n)/I))
+minA=monomialIdeal(apply(0..#L-1,p))
+vnumber0=min flatten degrees minA
+g=(a)->toList(set a-set{0}) 
+N=apply(apply(0..#L-1,f),g)
+vnumber=min flatten N
+vnumber0==vnumber
+
+
+--M=coker gens gb I
+regularity coker gens gb I
+
+--Conjecture says the next is >=0. Terai's example is a counterexample
+regularity(M)-vnumber
+
+--The next us always >=0
+dim(I)-regularity(M)
+
+--The next is true if and only if G is W2
+dim(I)==vnumber
+
+s=hilbertSeries M
+reduceHilbert s
+
+
+
+
+
