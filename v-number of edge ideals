@@ -1,9 +1,38 @@
-newpackage(
-
-
-
-
+--first package in Macaulay2. It includes a function for the computation of v-number. 
 --this compute the v-number (see https://www.sciencedirect.com/science/article/pii/S0196885819301241?via%3Dihub, proposition 4.2)
+
+
+newPackage( 
+         "v-number",
+         Version => "1.0",
+         Date => "April 24, 2020",
+         Authors => {{Name => "Rafael Villarreal",
+                      Email => "vila@math.cinvestav.mx",
+                      HomePage => "www.math.cinvestav.mx/~vila"
+                      },    
+                     {Name => "Delio Jaramillo",
+                     Email => djaramillo@math.cinvestav.mx}
+                    },
+         Headline => "A package for the computation of v-number", DebuggingMode => true
+         )
+         export{"v-number"}
+         -- this file contents a function that compute the v-number of a ideal
+         -- this is a joint work with Rafael Villarreal
+ 
+ --------------------------------------------------------------
+ --================= v-number function ========================
+ 
+v-number = method();
+  v-number (ideal) := (I) ->
+    (
+      L:=ass I
+      
+
+
+
+
+
+
 L=ass I
 f=(n)->flatten flatten  degrees mingens(quotient(I,L#n)/I)
 p=(n)->gens gb ideal(flatten mingens(quotient(I,L#n)/I))
