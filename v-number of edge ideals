@@ -1,6 +1,9 @@
+newpackage(
+
+
+
+
 --this compute the v-number (see https://www.sciencedirect.com/science/article/pii/S0196885819301241?via%3Dihub, proposition 4.2)
-
-
 L=ass I
 f=(n)->flatten flatten  degrees mingens(quotient(I,L#n)/I)
 p=(n)->gens gb ideal(flatten mingens(quotient(I,L#n)/I))
