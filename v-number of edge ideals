@@ -3,7 +3,7 @@
 
 
 newPackage( 
-         "v-number",
+         "Vnumber",
          Version => "1.0",
          Date => "April 24, 2020",
          Authors => {{Name => "Rafael Villarreal",
@@ -13,51 +13,58 @@ newPackage(
                      {Name => "Delio Jaramillo",
                      Email => djaramillo@math.cinvestav.mx}
                     },
-         Headline => "A package for the computation of v-number", DebuggingMode => true
+         Headline => "A package for the computation of Vnumber", DebuggingMode => true
          )
-         export{"v-number"}
-         -- this file contents a function that compute the v-number of a ideal
+         export{"Vnumber"}
+         -- this file contents a function that compute the Vnumber of a ideal
          -- this is a joint work with Rafael Villarreal
  
  --------------------------------------------------------------
  --================= v-number function ========================
  
-v-number = method();
-  v-number (ideal) := (I) ->
+ fun_gen = method();
+ fun_gen (Ideal,ZZ) := (I,n) -> (
+ L:=ass I;
+ flatten flatten degrees mingens(quotient(I,L#n)/I)
+ )
+ 
+-- pp_grobner = method();
+-- pp_grobner (Ideal,ZZ) := (I,n) -> (
+-- L:=ass I;
+-- gens gb ideal(flatten mingens(quotient(I,L#n)/I))
+ --)
+ 
+ gg_fun = method();
+ gg_fun (List) := (a) -> (
+ toList(set a-set{0}) 
+ )
+ 
+ vnumber = method();
+  vnumber (Ideal) := (I) ->
     (
-      L:=ass I
-      
+      L:=ass I;     
+      N:=apply(apply(0..#L-1,i->fun_gen(I,i)),i->gg_fun(i));
+      min flatten N 
+    )
+    
+    
+ beginDocumentation()
+  doc ///
+    Key
+        Vnumber
+    Headline
+        This Package computes the vnumber of an ideal 
+    Description
+        Text
+            I will add more functions in coding theory.
+    
+    
+    
+    
+
+end
 
 
-
-
-
-
-L=ass I
-f=(n)->flatten flatten  degrees mingens(quotient(I,L#n)/I)
-p=(n)->gens gb ideal(flatten mingens(quotient(I,L#n)/I))
-minA=monomialIdeal(apply(0..#L-1,p))
-vnumber0=min flatten degrees minA
-g=(a)->toList(set a-set{0}) 
-N=apply(apply(0..#L-1,f),g)
-vnumber=min flatten N
-vnumber0==vnumber
-
-
---M=coker gens gb I
-regularity coker gens gb I
-
---Conjecture says the next is >=0. Terai's example is a counterexample
-regularity(M)-vnumber
-
---The next us always >=0
-dim(I)-regularity(M)
-
---The next is true if and only if G is W2
-dim(I)==vnumber
-
-s=hilbertSeries M
-reduceHilbert s
 
 
 
