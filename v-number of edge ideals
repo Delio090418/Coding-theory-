@@ -92,8 +92,11 @@ newPackage(
  subsets(apply(elemBas(q,d,I),z->ideal(flatten entries z)),r)
  )
  
- gMdFunction = method();
- gMdFunction (ZZ,ZZ,ZZ,Ideal) := (q,d,r,I) ->(
+ --------------------------------------------------------
+ -=====================hyp function======================
+ 
+ hYpFunction = method();
+ hypFunction (ZZ,ZZ,ZZ,Ideal) := (q,d,r,I) ->(
  max apply(
  apply(
  setBas(q,d,r,I),ideal),
@@ -103,7 +106,31 @@ newPackage(
 )
  )
  
+ --------------------------------------------------------
  
+ gMdFunction = method();
+ gMdFunction (ZZ,ZZ,ZZ,Ideal) := (q,d,r,I) ->(
+ degree(coker gens gb I)-hYp(q,d,r,I)
+ )
+ 
+ 
+ 
+ 
+ --------------------------------------------------------------
+ --===================== Vasconcelo's Function ================
+ 
+ 
+ vasFunction = method();
+ vasFunction (ZZ,ZZ,ZZ,Ideal) := (q,d,r,I) ->(
+ min apply(
+ apply(
+ setBas(q,d,r,I),ideal),
+ x -> if #set flatten entries mingens ideal(leadTerm gens x)==r and not quotient(I,x)==I
+         then degree(I+x)
+      else 0
+)
+ )
+ .......
  
         
     
