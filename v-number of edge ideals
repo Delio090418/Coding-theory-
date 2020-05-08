@@ -10,7 +10,7 @@ newPackage(
                       Email => "vila@math.cinvestav.mx",
                       HomePage => "www.math.cinvestav.mx/~vila"
                       },    
-                     {Name => "Delio Jaramillo",
+                     {Name => "Delio Jaramillo-Velez",
                      Email => djaramillo@math.cinvestav.mx}
                     },
          Headline => "A package for the computation of Vnumber", DebuggingMode => true
@@ -117,7 +117,7 @@ newPackage(
  
  
  --------------------------------------------------------------
- --===================== Vasconcelo's Function ================
+ --===================== Vasconcelos Function ================
  
  
  vasFunction = method();
@@ -126,12 +126,24 @@ newPackage(
  apply(
  setBas(q,d,r,I),ideal),
  x -> if #set flatten entries mingens ideal(leadTerm gens x)==r and not quotient(I,x)==I
-         then degree(I+x)
-      else 0
+         then degree(coker gens gb quotient(I,x)
+      else degree(coker gens gb I)
 )
  )
- .......
  
+ 
+-----------------------------------------------------------
+--====================WEIGHT MATRIX===========================
+
+
+---------------------------------------------------------------
+--===================footprint matrix==========================
+
+
+
+
+
+
         
     
 -------------------------------------------------------------  
